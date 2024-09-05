@@ -1,0 +1,85 @@
+{
+  "name": "ui5-icons-symbols",
+  "displayName": "UI5 Icons Symbols",
+  "description": "Displays SAP UI5 icons next to their URIs",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.93.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:html",
+    "onLanguage:xml",
+    "onLanguage:javascript",
+    "onLanguage:typescript",
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "ui5-icons-symbols.helloWorld",
+        "title": "Hello World"
+      }
+    ],
+    "languages": [
+      {
+        "id": "html",
+        "extensions": [
+          ".html"
+        ],
+        "aliases": [
+          "HTML"
+        ]
+      },
+      {
+        "id": "xml",
+        "extensions": [
+          ".xml"
+        ],
+        "aliases": [
+          "XML"
+        ]
+      },
+      {
+        "id": "javascript",
+        "extensions": [
+          ".js"
+        ],
+        "aliases": [
+          "JavaScript"
+        ]
+      },
+      {
+        "id": "typescript",
+        "extensions": [
+          ".ts"
+        ],
+        "aliases": [
+          "TypeScript"
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.7",
+    "@types/node": "^20.16.5",
+    "@types/vscode": "^1.92.0",
+    "@typescript-eslint/eslint-plugin": "^8.3.0",
+    "@typescript-eslint/parser": "^8.3.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
+    "eslint": "^9.9.1",
+    "typescript": "^5.5.4"
+  }
+}
