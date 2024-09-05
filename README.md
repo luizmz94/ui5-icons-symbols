@@ -20,6 +20,32 @@ Example of how the icons are displayed:
 
 **SAP Icon Font** must be installed for the icons to display correctly. [Download and install the font here](https://experience.sap.com/fiori-design-web/downloads/#sap-icon-font).
 
+### How to install SAP Icon Font
+
+#### macOS
+
+Run the following command in the terminal:
+
+```bash
+curl -o SAP-icons_Horizon_5.9_Fonts.zip https://experience.sap.com/wp-content/uploads/sites/56/2024/07/SAP-icons_Horizon_5.9_Fonts.zip && unzip SAP-icons_Horizon_5.9_Fonts.zip -d SAP-icons_Fonts && mkdir -p ~/Library/Fonts && mv SAP-icons_Fonts/*.ttf ~/Library/Fonts/ && rm -rf SAP-icons_Horizon_5.9_Fonts.zip SAP-icons_Fonts && echo "SAP-icons_Horizon_5.9 installed successfully!"
+```
+
+#### Windows
+
+Run the following command in PowerShell:
+
+```powershell
+$zipUrl = "https://experience.sap.com/wp-content/uploads/sites/56/2024/07/SAP-icons_Horizon_5.9_Fonts.zip"; $zipPath = "$env:TEMP\SAP-icons_Horizon_5.9_Fonts.zip"; $extractPath = "$env:TEMP\SAP-icons_Fonts"; Invoke-WebRequest -Uri $zipUrl -OutFile $zipPath; Expand-Archive -Path $zipPath -DestinationPath $extractPath; $fontsPath = "$env:windir\Fonts"; if (-not (Test-Path $fontsPath)) { New-Item -Path $fontsPath -ItemType Directory }; Get-ChildItem "$extractPath\*.ttf" | ForEach-Object { $fontPath = "$fontsPath\$($_.Name)"; Copy-Item $_.FullName -Destination $fontPath }; Remove-Item -Recurse -Force $zipPath, $extractPath; Write-Host "SAP-icons_Horizon_5.9 installed successfully!"
+```
+
+#### Linux
+
+Run the following command in the terminal:
+
+```bash
+wget -O SAP-icons_Horizon_5.9_Fonts.zip https://experience.sap.com/wp-content/uploads/sites/56/2024/07/SAP-icons_Horizon_5.9_Fonts.zip && unzip SAP-icons_Horizon_5.9_Fonts.zip -d SAP-icons_Fonts && mkdir -p ~/.local/share/fonts && mv SAP-icons_Fonts/*.ttf ~/.local/share/fonts/ && fc-cache -f -v && rm -rf SAP-icons_Horizon_5.9_Fonts.zip SAP-icons_Fonts && echo "SAP-icons_Horizon_5.9 installed successfully!"
+```
+
 ## Extension Settings
 
 This extension doesn't add any VS Code settings at the moment.
