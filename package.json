@@ -1,6 +1,7 @@
 {
   "name": "ui5-icons-symbols",
   "displayName": "UI5 Icons Symbols",
+  "publisher": "luizmz94",
   "description": "Displays SAP UI5 icons next to their URIs",
   "version": "0.0.1",
   "repository": {
@@ -86,5 +87,8 @@
     "@vscode/test-electron": "^2.4.1",
     "eslint": "^9.9.1",
     "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "fontfaceobserver": "^2.3.0"
   }
 }
