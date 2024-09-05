@@ -11,7 +11,7 @@ export function activate(context: vscode.ExtensionContext) {
         after: {
             margin: '0 0 0 1rem',
             color: '#00FF00', // Verde neon mais chamativo
-            fontWeight: 'bold'
+            fontWeight: 'normal'
         }
     });
 

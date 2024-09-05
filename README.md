@@ -1,6 +1,10 @@
 
 # UI5 Icons Symbols
 
+⚠️ **IMPORTANT:** This extension requires the **SAP Icon Font** to be installed on your machine for proper functionality. You can download and install the font from the following link:
+
+[Download SAP Icon Font](https://experience.sap.com/fiori-design-web/downloads/#sap-icon-font)
+
 This Visual Studio Code extension enhances your development workflow by displaying SAP UI5 icons next to their URI references in HTML, XML, JavaScript, and TypeScript files.
 
 ## Features
@@ -10,14 +14,11 @@ This Visual Studio Code extension enhances your development workflow by displayi
   
 Example of how the icons are displayed:
 
-```html
-<!-- The icon will be shown next to the URI -->
-<sap-icon uri="sap-icon://accidental-leave"></sap-icon>
-```
+![Demonstração da extensão](sample.gif)
 
 ## Requirements
 
-No special requirements or dependencies are needed. Simply install and start using the extension in your preferred projects.
+**SAP Icon Font** must be installed for the icons to display correctly. [Download and install the font here](https://experience.sap.com/fiori-design-web/downloads/#sap-icon-font).
 
 ## Extension Settings
 
