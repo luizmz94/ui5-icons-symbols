@@ -3,8 +3,12 @@
   "displayName": "UI5 Icons Symbols",
   "description": "Displays SAP UI5 icons next to their URIs",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luizmz94/ui5-icons-symbols.git"
+  },
   "engines": {
-    "vscode": "^1.93.0"
+    "vscode": "^1.58.0"
   },
   "categories": [
     "Other"
@@ -74,7 +78,7 @@
   "devDependencies": {
     "@types/mocha": "^10.0.7",
     "@types/node": "^20.16.5",
-    "@types/vscode": "^1.92.0",
+    "@types/vscode": "^1.58.0",
     "@typescript-eslint/eslint-plugin": "^8.3.0",
     "@typescript-eslint/parser": "^8.3.0",
     "@vscode/test-cli": "^0.0.10",
