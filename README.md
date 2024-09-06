@@ -40,6 +40,34 @@ else
 fi
 ```
 
+#### Windows
+
+Run the following command in PowerShell:
+
+```powershell
+$downloadFolder = [System.IO.Path]::Combine([Environment]::GetFolderPath('UserProfile'), 'Downloads')
+$zipUrl = "https://experience.sap.com/wp-content/uploads/sites/56/2024/07/SAP-icons_Horizon_5.9_Fonts.zip"
+$zipPath = [System.IO.Path]::Combine($downloadFolder, "SAP-icons_Horizon_5.9_Fonts.zip")
+$extractPath = [System.IO.Path]::Combine($downloadFolder, "SAP-icons_Horizon_5.9_Fonts")
+
+if (-Not (Test-Path "$downloadFolder\SAP-icons.ttf")) {
+    Write-Host "SAP-icons.ttf not found. Downloading and extracting to Downloads folder..."
+    Invoke-WebRequest -Uri $zipUrl -OutFile $zipPath
+    Expand-Archive -Path $zipPath -DestinationPath $extractPath
+    $ttfFile = Get-ChildItem -Path $extractPath -Recurse -Filter 'SAP-icons.ttf' | Select-Object -First 1
+    if ($ttfFile) {
+        Move-Item $ttfFile.FullName -Destination $downloadFolder
+        Start-Process "$downloadFolder\SAP-icons.ttf"
+        Write-Host "SAP-icons.ttf downloaded and ready to install. Check your Downloads folder."
+    } else {
+        Write-Host "SAP-icons.ttf not found after extraction."
+    }
+    Remove-Item -Recurse -Force $zipPath, $extractPath
+} else {
+    Write-Host "SAP-icons.ttf is already in the Downloads folder."
+}
+```
+
 
 ## Extension Settings
 
