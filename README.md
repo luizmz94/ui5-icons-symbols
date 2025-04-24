@@ -13,7 +13,7 @@ This Visual Studio Code extension enhances your development workflow by displayi
 
 Example of how the icons are displayed:
 
-![Demonstração da extensão](sample.gif)
+![Extension Demo](sample.gif)
 
 ## Requirements
 
@@ -31,25 +31,25 @@ ZIP_NAME=SAP-icons_Horizon_5.10_Fonts.zip
 DOWNLOAD_URL="https://experience.sap.com/wp-content/uploads/sites/56/2024/10/$ZIP_NAME"
 EXTRACT_DIR=SAP-icons_Horizon_5.10_Fonts
 
-echo "Verificando instalação da fonte SAP-icons..."
+echo "Checking SAP-icons font installation..."
 
 curl -L -o "$ZIP_NAME" "$DOWNLOAD_URL" && \
 unzip -o "$ZIP_NAME" -d "$EXTRACT_DIR" && \
 mkdir -p ~/Library/Fonts && \
 cp -f "$EXTRACT_DIR/Fonts/SAP-icons.ttf" "$FONT_DEST" && \
 rm -rf "$ZIP_NAME" "$EXTRACT_DIR" && \
-echo "SAP-icons.ttf instalada ou atualizada com sucesso em ~/Library/Fonts/"
+echo "SAP-icons.ttf successfully installed or updated in ~/Library/Fonts/"
 ```
 
 #### 🪟 Windows
 
-Você pode instalar a fonte de duas formas:
+You can install the font in two ways:
 
 ---
 
-#### 🔧 **Opção 1: Instalar manualmente (sem administrador)**
+#### 🔧 **Option 1: Manual installation (no admin rights)**
 
-Este script baixa e extrai a fonte para a pasta Downloads e **abre a janela de instalação da fonte**. O usuário deverá clicar em **"Instalar"**.
+This script downloads and extracts the font to your Downloads folder and opens the installation window. You will need to click **"Install"** manually.
 
 ```powershell
 $fontName = "SAP-icons.ttf"
@@ -59,7 +59,7 @@ $zipPath = Join-Path $downloadFolder "SAP-icons_Horizon_5.10_Fonts.zip"
 $extractPath = Join-Path $downloadFolder "SAP-icons_Horizon_5.10_Fonts"
 $fontPath = Join-Path $downloadFolder $fontName
 
-Write-Host "`n🔽 Baixando fonte SAP Icons..."
+Write-Host "`n🔽 Downloading SAP Icons font..."
 Invoke-WebRequest -Uri $zipUrl -OutFile $zipPath
 Expand-Archive -Path $zipPath -DestinationPath $extractPath -Force
 
@@ -68,9 +68,9 @@ $ttfFile = Get-ChildItem -Path "$extractPath\Fonts" -Filter $fontName | Select-O
 if ($ttfFile) {
     Copy-Item $ttfFile.FullName -Destination $fontPath -Force
     Start-Process $fontPath
-    Write-Host "`n📝 A janela de instalação será aberta. Clique em 'Instalar'."
+    Write-Host "`n📝 Installation window will open. Click 'Install'."
 } else {
-    Write-Host "❌ SAP-icons.ttf não encontrada após extração."
+    Write-Host "❌ SAP-icons.ttf not found after extraction."
 }
 
 Remove-Item -Recurse -Force $zipPath, $extractPath
@@ -78,9 +78,9 @@ Remove-Item -Recurse -Force $zipPath, $extractPath
 
 ---
 
-#### 🛡️ **Opção 2: Instalação automática no sistema (requer administrador)**
+#### 🛡️ **Option 2: System-level installation (admin rights required)**
 
-Este script **instala a fonte diretamente** na pasta `C:\Windows\Fonts` e a **registra no sistema**, sem precisar clicar em nada. **Execute como administrador.**
+This script installs the font directly to `C:\Windows\Fonts` and registers it in the system registry without user interaction. **Run as Administrator.**
 
 ```powershell
 $fontName = "SAP-icons.ttf"
@@ -104,9 +104,9 @@ if ($ttfFile) {
                      -PropertyType String \
                      -Value $fontName \
                      -Force | Out-Null
-    Write-Host "✅ Fonte instalada com sucesso!"
+    Write-Host "✅ Font successfully installed!"
 } else {
-    Write-Host "❌ SAP-icons.ttf não encontrada após extração."
+    Write-Host "❌ SAP-icons.ttf not found after extraction."
 }
 
 Remove-Item -Recurse -Force $zipPath, $extractPath
@@ -129,7 +129,7 @@ There are currently no known issues. If you encounter any, please report them.
 
 ### 1.0.1 - 5
 
-- Bug fix!
+- Bug fixes.
 
 ### 1.0.6
 
