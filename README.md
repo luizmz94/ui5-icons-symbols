@@ -1,4 +1,3 @@
-
 # UI5 Icons Symbols
 
 ⚠️ **IMPORTANT:** This extension requires the **SAP Icon Font** to be installed on your machine for proper functionality. You can download and install the font from the following link:
@@ -11,7 +10,7 @@ This Visual Studio Code extension enhances your development workflow by displayi
 
 - Automatically detects SAP UI5 icon URIs (`sap-icon://...`) in your files and visually displays the corresponding icon.
 - Supports `html`, `xml`, `javascript`, and `typescript` files.
-  
+
 Example of how the icons are displayed:
 
 ![Demonstração da extensão](sample.gif)
@@ -27,47 +26,91 @@ Example of how the icons are displayed:
 Run the following command in the terminal:
 
 ```bash
-if [ ! -f ~/Library/Fonts/SAP-icons.ttf ]; then
-    echo 'SAP-icons.ttf not found. Installing...'
-    curl -o SAP-icons_Horizon_5.9_Fonts.zip https://experience.sap.com/wp-content/uploads/sites/56/2024/07/SAP-icons_Horizon_5.9_Fonts.zip && \
-    unzip SAP-icons_Horizon_5.9_Fonts.zip && \
-    mkdir -p ~/Library/Fonts && \
-    mv SAP-icons_Horizon_5.9_Fonts/SAP-icons.ttf ~/Library/Fonts/ && \
-    rm -rf SAP-icons_Horizon_5.9_Fonts.zip SAP-icons_Horizon_5.9_Fonts && \
-    echo 'SAP-icons_Horizon_5.9 installed successfully!'
-else
-    echo 'SAP-icons.ttf is already installed.'
-fi
+FONT_DEST=~/Library/Fonts/SAP-icons.ttf
+ZIP_NAME=SAP-icons_Horizon_5.10_Fonts.zip
+DOWNLOAD_URL="https://experience.sap.com/wp-content/uploads/sites/56/2024/10/$ZIP_NAME"
+EXTRACT_DIR=SAP-icons_Horizon_5.10_Fonts
+
+echo "Verificando instalação da fonte SAP-icons..."
+
+curl -L -o "$ZIP_NAME" "$DOWNLOAD_URL" && \
+unzip -o "$ZIP_NAME" -d "$EXTRACT_DIR" && \
+mkdir -p ~/Library/Fonts && \
+cp -f "$EXTRACT_DIR/Fonts/SAP-icons.ttf" "$FONT_DEST" && \
+rm -rf "$ZIP_NAME" "$EXTRACT_DIR" && \
+echo "SAP-icons.ttf instalada ou atualizada com sucesso em ~/Library/Fonts/"
 ```
 
-#### Windows
+#### 🪟 Windows
 
-Run the following command in PowerShell:
+Você pode instalar a fonte de duas formas:
+
+---
+
+#### 🔧 **Opção 1: Instalar manualmente (sem administrador)**
+
+Este script baixa e extrai a fonte para a pasta Downloads e **abre a janela de instalação da fonte**. O usuário deverá clicar em **"Instalar"**.
 
 ```powershell
-$downloadFolder = [System.IO.Path]::Combine([Environment]::GetFolderPath('UserProfile'), 'Downloads')
-$zipUrl = "https://experience.sap.com/wp-content/uploads/sites/56/2024/07/SAP-icons_Horizon_5.9_Fonts.zip"
-$zipPath = [System.IO.Path]::Combine($downloadFolder, "SAP-icons_Horizon_5.9_Fonts.zip")
-$extractPath = [System.IO.Path]::Combine($downloadFolder, "SAP-icons_Horizon_5.9_Fonts")
+$fontName = "SAP-icons.ttf"
+$zipUrl = "https://experience.sap.com/wp-content/uploads/sites/56/2024/10/SAP-icons_Horizon_5.10_Fonts.zip"
+$downloadFolder = [Environment]::GetFolderPath("UserProfile") + "\Downloads"
+$zipPath = Join-Path $downloadFolder "SAP-icons_Horizon_5.10_Fonts.zip"
+$extractPath = Join-Path $downloadFolder "SAP-icons_Horizon_5.10_Fonts"
+$fontPath = Join-Path $downloadFolder $fontName
 
-if (-Not (Test-Path "$downloadFolder\SAP-icons.ttf")) {
-    Write-Host "SAP-icons.ttf not found. Downloading and extracting to Downloads folder..."
-    Invoke-WebRequest -Uri $zipUrl -OutFile $zipPath
-    Expand-Archive -Path $zipPath -DestinationPath $extractPath
-    $ttfFile = Get-ChildItem -Path $extractPath -Recurse -Filter 'SAP-icons.ttf' | Select-Object -First 1
-    if ($ttfFile) {
-        Move-Item $ttfFile.FullName -Destination $downloadFolder
-        Start-Process "$downloadFolder\SAP-icons.ttf"
-        Write-Host "SAP-icons.ttf downloaded and ready to install. Check your Downloads folder."
-    } else {
-        Write-Host "SAP-icons.ttf not found after extraction."
-    }
-    Remove-Item -Recurse -Force $zipPath, $extractPath
+Write-Host "`n🔽 Baixando fonte SAP Icons..."
+Invoke-WebRequest -Uri $zipUrl -OutFile $zipPath
+Expand-Archive -Path $zipPath -DestinationPath $extractPath -Force
+
+$ttfFile = Get-ChildItem -Path "$extractPath\Fonts" -Filter $fontName | Select-Object -First 1
+
+if ($ttfFile) {
+    Copy-Item $ttfFile.FullName -Destination $fontPath -Force
+    Start-Process $fontPath
+    Write-Host "`n📝 A janela de instalação será aberta. Clique em 'Instalar'."
 } else {
-    Write-Host "SAP-icons.ttf is already in the Downloads folder."
+    Write-Host "❌ SAP-icons.ttf não encontrada após extração."
 }
+
+Remove-Item -Recurse -Force $zipPath, $extractPath
 ```
 
+---
+
+#### 🛡️ **Opção 2: Instalação automática no sistema (requer administrador)**
+
+Este script **instala a fonte diretamente** na pasta `C:\Windows\Fonts` e a **registra no sistema**, sem precisar clicar em nada. **Execute como administrador.**
+
+```powershell
+$fontName = "SAP-icons.ttf"
+$zipUrl = "https://experience.sap.com/wp-content/uploads/sites/56/2024/10/SAP-icons_Horizon_5.10_Fonts.zip"
+$downloadFolder = [Environment]::GetFolderPath("UserProfile") + "\Downloads"
+$zipPath = Join-Path $downloadFolder "SAP-icons_Horizon_5.10_Fonts.zip"
+$extractPath = Join-Path $downloadFolder "SAP-icons_Horizon_5.10_Fonts"
+$systemFontsPath = "$env:SystemRoot\Fonts"
+$fontDestPath = Join-Path $systemFontsPath $fontName
+$fontRegName = "SAP Icons"
+
+Invoke-WebRequest -Uri $zipUrl -OutFile $zipPath
+Expand-Archive -Path $zipPath -DestinationPath $extractPath -Force
+
+$ttfFile = Get-ChildItem -Path "$extractPath\Fonts" -Filter $fontName | Select-Object -First 1
+
+if ($ttfFile) {
+    Copy-Item $ttfFile.FullName -Destination $fontDestPath -Force
+    New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts" \
+                     -Name "$fontRegName (TrueType)" \
+                     -PropertyType String \
+                     -Value $fontName \
+                     -Force | Out-Null
+    Write-Host "✅ Fonte instalada com sucesso!"
+} else {
+    Write-Host "❌ SAP-icons.ttf não encontrada após extração."
+}
+
+Remove-Item -Recurse -Force $zipPath, $extractPath
+```
 
 ## Extension Settings
 
@@ -84,8 +127,16 @@ There are currently no known issues. If you encounter any, please report them.
 - Initial release of UI5 Icons Symbols.
 - Added support for detecting and displaying icons in HTML, XML, JavaScript, and TypeScript files.
 
-### 1.0.1 - 3 
+### 1.0.1 - 5
+
 - Bug fix!
+
+### 1.0.6
+
+- Updated icon font version to SAP-icons Horizon 5.10.
+- Added cross-platform installation scripts (macOS and Windows).
+- Added support for automatic font installation on Windows with PowerShell (including system-level registration).
+- Improved documentation clarity and user guidance for font setup.
 
 ---
 
