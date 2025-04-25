@@ -6,6 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.0.8] - 2025-05-15
+
+### Added
+
+- SVG generation for all available icons.
+- Improved icon auto-completion suggestions with real-time visual previews.
+- Optimized icon rendering performance in larger files.
+- Enhanced overall UI responsiveness.
+
+## [1.0.7] - 2025-05-01
+
+### Fixed
+
+- Corrections in the translation of `README.md`.
+
 ## [1.0.6] - 2025-04-24
 
 ### Added
@@ -18,8 +33,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - README.md updated with clearer installation instructions.
 - Improved documentation on font requirements and setup process.
-
----
 
 ## [1.0.5] - 2025-04-10
 

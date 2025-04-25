@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+    <style>
+      @font-face {
+        font-family: "SAP-icons";
+        src: url("/Users/luiz/Downloads/Fonts/SAP-icons.ttf");
+      }
+      text {
+        font-family: "SAP-icons";
+        font-size: 38px;
+        fill: #00FF00;
+        text-anchor: middle;
+        dominant-baseline: central;
+      }
+    </style>
+    <text x="24" y="24"></text>
+</svg>

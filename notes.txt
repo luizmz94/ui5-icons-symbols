@@ -1,0 +1,8 @@
+comando para gerar o gif: 
+
+ffmpeg -y -i "/Users/luiz/Documents/Projects/ui5-icons-symbols/Demostração/25-04-2025.mov" -vf "fps=24,scale=iw:ih:flags=lanczos,palettegen" "/Users/luiz/Documents/Projects/ui5-icons-symbols/Demostração/palette.png" 
+ffmpeg -y -i "/Users/luiz/Documents/Projects/ui5-icons-symbols/Demostração/25-04-2025.mov" -i "/Users/luiz/Documents/Projects/ui5-icons-symbols/Demostração/palette.png" -filter_complex "[0:v]setpts=0.5*PTS,fps=24,scale=iw:ih:flags=lanczos[x];[x][1:v]paletteuse" "/Users/luiz/Documents/Projects/ui5-icons-symbols/Demostração/25-04-2025.gif"
+
+
+
+

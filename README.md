@@ -131,12 +131,19 @@ There are currently no known issues. If you encounter any, please report them.
 
 - Bug fixes.
 
-### 1.0.6
+### 1.0.6 - 7
 
 - Updated icon font version to SAP-icons Horizon 5.10.
 - Added cross-platform installation scripts (macOS and Windows).
 - Added support for automatic font installation on Windows with PowerShell (including system-level registration).
 - Improved documentation clarity and user guidance for font setup.
+
+### 1.0.8
+
+- Added SVG generation for all available icons.
+- Improved icon auto-completion suggestions with real-time visual previews.
+- Optimized icon rendering performance in larger files.
+- Enhanced overall UI responsiveness.
 
 ---
 
