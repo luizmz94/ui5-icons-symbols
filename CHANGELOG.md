@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.0.9] - 2026-04-24
+
+### Fixed
+
+- Font download scripts updated: SAP moved the icon font away from `experience.sap.com`. Scripts now download the TTF directly from the official SAP GitHub repository (`SAP/theming-base-content`), removing the need for ZIP extraction.
+- Updated manual download link to the new SAP Design System page (`sap.com/design-system`).
+
+---
+
 ## [1.0.8] - 2025-05-15
 
 ### Added

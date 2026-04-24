@@ -21,7 +21,7 @@ export function activate(context: vscode.ExtensionContext) {
             'It seems that the SAP-icons font is not loaded. Please make sure the SAP-icons font is installed on your system.'
         );
         vscode.env.openExternal(
-            vscode.Uri.parse('https://experience.sap.com/fiori-design-web/downloads/#sap-icon-font')
+            vscode.Uri.parse('https://github.com/SAP/theming-base-content/blob/master/content/Base/baseLib/baseTheme/fonts/SAP-icons.ttf')
         );
     };
 

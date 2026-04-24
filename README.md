@@ -1,8 +1,8 @@
 # UI5 Icons Symbols
 
-⚠️ **IMPORTANT:** This extension requires the **SAP Icon Font** to be installed on your machine for proper functionality. You can download and install the font from the following link:
+⚠️ **IMPORTANT:** This extension requires the **SAP Icon Font** to be installed on your machine for proper functionality. You can download and install the font from the official SAP GitHub repository:
 
-[Download SAP Icon Font](https://experience.sap.com/fiori-design-web/downloads/#sap-icon-font)
+[Download SAP Icon Font](https://www.sap.com/design-system/fiori-design-web/resources/downloads#sap-icon-font)
 
 This Visual Studio Code extension enhances your development workflow by displaying SAP UI5 icons next to their URI references in HTML, XML, JavaScript, and TypeScript files.
 
@@ -17,7 +17,7 @@ Example of how the icons are displayed:
 
 ## Requirements
 
-**SAP Icon Font** must be installed for the icons to display correctly. [Download and install the font here](https://experience.sap.com/fiori-design-web/downloads/#sap-icon-font).
+**SAP Icon Font** must be installed for the icons to display correctly. [Download and install the font here](https://www.sap.com/design-system/fiori-design-web/resources/downloads#sap-icon-font).
 
 ### How to install SAP Icon Font
 
@@ -27,17 +27,12 @@ Run the following command in the terminal:
 
 ```bash
 FONT_DEST=~/Library/Fonts/SAP-icons.ttf
-ZIP_NAME=SAP-icons_Horizon_5.10_Fonts.zip
-DOWNLOAD_URL="https://experience.sap.com/wp-content/uploads/sites/56/2024/10/$ZIP_NAME"
-EXTRACT_DIR=SAP-icons_Horizon_5.10_Fonts
+DOWNLOAD_URL="https://raw.githubusercontent.com/SAP/theming-base-content/master/content/Base/baseLib/baseTheme/fonts/SAP-icons.ttf"
 
 echo "Checking SAP-icons font installation..."
 
-curl -L -o "$ZIP_NAME" "$DOWNLOAD_URL" && \
-unzip -o "$ZIP_NAME" -d "$EXTRACT_DIR" && \
 mkdir -p ~/Library/Fonts && \
-cp -f "$EXTRACT_DIR/Fonts/SAP-icons.ttf" "$FONT_DEST" && \
-rm -rf "$ZIP_NAME" "$EXTRACT_DIR" && \
+curl -L -o "$FONT_DEST" "$DOWNLOAD_URL" && \
 echo "SAP-icons.ttf successfully installed or updated in ~/Library/Fonts/"
 ```
 
@@ -49,31 +44,19 @@ You can install the font in two ways:
 
 #### 🔧 **Option 1: Manual installation (no admin rights)**
 
-This script downloads and extracts the font to your Downloads folder and opens the installation window. You will need to click **"Install"** manually.
+This script downloads the font to your Downloads folder and opens the installation window. You will need to click **"Install"** manually.
 
 ```powershell
 $fontName = "SAP-icons.ttf"
-$zipUrl = "https://experience.sap.com/wp-content/uploads/sites/56/2024/10/SAP-icons_Horizon_5.10_Fonts.zip"
+$downloadUrl = "https://raw.githubusercontent.com/SAP/theming-base-content/master/content/Base/baseLib/baseTheme/fonts/SAP-icons.ttf"
 $downloadFolder = [Environment]::GetFolderPath("UserProfile") + "\Downloads"
-$zipPath = Join-Path $downloadFolder "SAP-icons_Horizon_5.10_Fonts.zip"
-$extractPath = Join-Path $downloadFolder "SAP-icons_Horizon_5.10_Fonts"
 $fontPath = Join-Path $downloadFolder $fontName
 
-Write-Host "`n🔽 Downloading SAP Icons font..."
-Invoke-WebRequest -Uri $zipUrl -OutFile $zipPath
-Expand-Archive -Path $zipPath -DestinationPath $extractPath -Force
+Write-Host "`nDownloading SAP Icons font..."
+Invoke-WebRequest -Uri $downloadUrl -OutFile $fontPath
 
-$ttfFile = Get-ChildItem -Path "$extractPath\Fonts" -Filter $fontName | Select-Object -First 1
-
-if ($ttfFile) {
-    Copy-Item $ttfFile.FullName -Destination $fontPath -Force
-    Start-Process $fontPath
-    Write-Host "`n📝 Installation window will open. Click 'Install'."
-} else {
-    Write-Host "❌ SAP-icons.ttf not found after extraction."
-}
-
-Remove-Item -Recurse -Force $zipPath, $extractPath
+Start-Process $fontPath
+Write-Host "`nInstallation window will open. Click 'Install'."
 ```
 
 ---
@@ -84,32 +67,20 @@ This script installs the font directly to `C:\Windows\Fonts` and registers it in
 
 ```powershell
 $fontName = "SAP-icons.ttf"
-$zipUrl = "https://experience.sap.com/wp-content/uploads/sites/56/2024/10/SAP-icons_Horizon_5.10_Fonts.zip"
-$downloadFolder = [Environment]::GetFolderPath("UserProfile") + "\Downloads"
-$zipPath = Join-Path $downloadFolder "SAP-icons_Horizon_5.10_Fonts.zip"
-$extractPath = Join-Path $downloadFolder "SAP-icons_Horizon_5.10_Fonts"
+$downloadUrl = "https://raw.githubusercontent.com/SAP/theming-base-content/master/content/Base/baseLib/baseTheme/fonts/SAP-icons.ttf"
 $systemFontsPath = "$env:SystemRoot\Fonts"
 $fontDestPath = Join-Path $systemFontsPath $fontName
 $fontRegName = "SAP Icons"
 
-Invoke-WebRequest -Uri $zipUrl -OutFile $zipPath
-Expand-Archive -Path $zipPath -DestinationPath $extractPath -Force
+Invoke-WebRequest -Uri $downloadUrl -OutFile $fontDestPath
 
-$ttfFile = Get-ChildItem -Path "$extractPath\Fonts" -Filter $fontName | Select-Object -First 1
+New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts" `
+                 -Name "$fontRegName (TrueType)" `
+                 -PropertyType String `
+                 -Value $fontName `
+                 -Force | Out-Null
 
-if ($ttfFile) {
-    Copy-Item $ttfFile.FullName -Destination $fontDestPath -Force
-    New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts" \
-                     -Name "$fontRegName (TrueType)" \
-                     -PropertyType String \
-                     -Value $fontName \
-                     -Force | Out-Null
-    Write-Host "✅ Font successfully installed!"
-} else {
-    Write-Host "❌ SAP-icons.ttf not found after extraction."
-}
-
-Remove-Item -Recurse -Force $zipPath, $extractPath
+Write-Host "Font successfully installed!"
 ```
 
 ## Extension Settings
@@ -144,6 +115,11 @@ There are currently no known issues. If you encounter any, please report them.
 - Improved icon auto-completion suggestions with real-time visual previews.
 - Optimized icon rendering performance in larger files.
 - Enhanced overall UI responsiveness.
+
+### 1.0.9
+
+- Fixed font download scripts: SAP moved the icon font away from `experience.sap.com`. Scripts now download directly from the official SAP GitHub repository (`SAP/theming-base-content`), no ZIP extraction needed.
+- Updated manual download link to the new SAP Design System page.
 
 ---
 
