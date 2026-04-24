@@ -27,7 +27,7 @@ Run the following command in the terminal:
 
 ```bash
 FONT_DEST=~/Library/Fonts/SAP-icons.ttf
-DOWNLOAD_URL="https://raw.githubusercontent.com/SAP/theming-base-content/master/content/Base/baseLib/baseTheme/fonts/SAP-icons.ttf"
+DOWNLOAD_URL="https://raw.githubusercontent.com/SAP/theming-base-content/master/content/Base/baseLib/sap_horizon/fonts/SAP-icons.ttf"
 
 echo "Checking SAP-icons font installation..."
 
@@ -48,7 +48,7 @@ This script downloads the font to your Downloads folder and opens the installati
 
 ```powershell
 $fontName = "SAP-icons.ttf"
-$downloadUrl = "https://raw.githubusercontent.com/SAP/theming-base-content/master/content/Base/baseLib/baseTheme/fonts/SAP-icons.ttf"
+$downloadUrl = "https://raw.githubusercontent.com/SAP/theming-base-content/master/content/Base/baseLib/sap_horizon/fonts/SAP-icons.ttf"
 $downloadFolder = [Environment]::GetFolderPath("UserProfile") + "\Downloads"
 $fontPath = Join-Path $downloadFolder $fontName
 
@@ -67,7 +67,7 @@ This script installs the font directly to `C:\Windows\Fonts` and registers it in
 
 ```powershell
 $fontName = "SAP-icons.ttf"
-$downloadUrl = "https://raw.githubusercontent.com/SAP/theming-base-content/master/content/Base/baseLib/baseTheme/fonts/SAP-icons.ttf"
+$downloadUrl = "https://raw.githubusercontent.com/SAP/theming-base-content/master/content/Base/baseLib/sap_horizon/fonts/SAP-icons.ttf"
 $systemFontsPath = "$env:SystemRoot\Fonts"
 $fontDestPath = Join-Path $systemFontsPath $fontName
 $fontRegName = "SAP Icons"
@@ -115,6 +115,10 @@ There are currently no known issues. If you encounter any, please report them.
 - Improved icon auto-completion suggestions with real-time visual previews.
 - Optimized icon rendering performance in larger files.
 - Enhanced overall UI responsiveness.
+
+### 1.0.10
+
+- Corrected font download URL to use the Horizon theme (`sap_horizon`) instead of the base/Quartz theme. Previous URL served Version 4.24 (Quartz); now correctly downloads Version 5.13 (Horizon).
 
 ### 1.0.9
 

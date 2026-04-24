@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.0.10] - 2026-04-24
+
+### Fixed
+
+- Corrected font download URL to use the Horizon theme (`sap_horizon`) instead of the base/Quartz theme from the SAP GitHub repository. The previous URL pointed to Version 4.24 (Quartz); the correct URL now downloads Version 5.13 (Horizon).
+
+---
+
 ## [1.0.9] - 2026-04-24
 
 ### Fixed
